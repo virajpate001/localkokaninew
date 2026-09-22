@@ -7,6 +7,19 @@ import { FiUpload, FiX, FiLoader, FiImage, FiStar } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 
+function getImageDimensions(file) {
+  return new Promise((resolve, reject) => {
+    const img = new window.Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      resolve({ width: img.naturalWidth, height: img.naturalHeight });
+      URL.revokeObjectURL(url);
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
 export default function MultiImageUploader({
   value = [],       // array of { url, publicId }
   onChange,          // (newArray) => void
@@ -90,11 +103,11 @@ export default function MultiImageUploader({
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-2">
-  {label}{" "}
-  <span className="text-gray-400 font-normal">
-    ({value.length}/{maxImages}) {value.length > 0 && value.length < 4 && "— add at least 4-5 for best presentation"}
-  </span>
-</label>
+        {label}{" "}
+        <span className="text-gray-400 font-normal">
+          ({value.length}/{maxImages}) {value.length > 0 && value.length < 4 && "— add at least 4-5 for best presentation"}
+        </span>
+      </label>
 
       {/* Existing images grid */}
       {value.length > 0 && (
