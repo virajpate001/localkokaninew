@@ -76,7 +76,12 @@ export default function AdminSettingsPage() {
           Shown in the navbar, footer, and admin panel. Recommended: square or
           wide transparent PNG.
         </p>
-       <ImageUploader value={heroImage} onChange={setHeroImage} folder="site-settings" label="Hero Banner Image" minWidth={1920} minHeight={1080} />
+        <ImageUploader
+          value={logo}
+          onChange={setLogo}
+          folder="site-settings"
+          label="Logo"
+        />
       </div>
       <div className="card p-6">
         <h2 className="font-display font-semibold text-lg text-primary mb-1">
@@ -86,12 +91,7 @@ export default function AdminSettingsPage() {
           The background image shown behind the homepage search bar.
           Recommended: a wide landscape photo, at least 1920px wide.
         </p>
-        <ImageUploader
-          value={heroImage}
-          onChange={setHeroImage}
-          folder="site-settings"
-          label="Hero Banner Image"
-        />
+       <ImageUploader value={heroImage} onChange={setHeroImage} folder="site-settings" label="Hero Banner Image" minWidth={1920} minHeight={1080} />
       </div>
 
       <button

@@ -89,7 +89,7 @@ export default async function HotelDetailPage({ params }) {
 
   const hotelSchema = generateHotelSchema(hotel);
 
-  return ( 
+  return (
     <>
       <JsonLd data={hotelSchema} />
       {faqSchema && <JsonLd data={faqSchema} />}
@@ -115,7 +115,7 @@ export default async function HotelDetailPage({ params }) {
                 {hotel.name}
                 {hotel.verified && <VerifiedBadge />}
               </h1>
-              
+
               <CustomBadge
                 text={hotel.customBadgeText}
                 color={hotel.customBadgeColor}

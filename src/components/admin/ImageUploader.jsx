@@ -103,9 +103,8 @@ export default function ImageUploader({
           onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
           onDragLeave={() => setDragActive(false)}
           onDrop={handleDrop}
-          className={`aspect-[16/9] rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors ${
-            dragActive ? "border-secondary bg-secondary/5" : "border-gray-200 hover:border-secondary/50"
-          }`}
+          className={`aspect-[16/9] rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors ${dragActive ? "border-secondary bg-secondary/5" : "border-gray-200 hover:border-secondary/50"
+            }`}
         >
           {isUploading ? (
             <>
