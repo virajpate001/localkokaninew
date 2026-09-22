@@ -131,12 +131,7 @@ export default function BlogPostForm({ initialData = null }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
       <div className="card p-6 space-y-5">
-        <ImageUploader
-          value={coverImage}
-          onChange={setCoverImage}
-          folder="blog"
-          label="Cover Image"
-        />
+       <ImageUploader value={coverImage} onChange={setCoverImage} folder="blog" label="Cover Image" minWidth={1200} minHeight={750} />
         {errors.coverImage && <p className="text-red-500 text-xs">{errors.coverImage}</p>}
 
         <div>

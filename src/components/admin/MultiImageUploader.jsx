@@ -27,6 +27,7 @@ export default function MultiImageUploader({
       return;
     }
 
+
     const invalidFile = files.find((f) => !f.type.startsWith("image/"));
     if (invalidFile) {
       toast.error("Please upload only image files");
@@ -37,6 +38,20 @@ export default function MultiImageUploader({
     if (oversizedFile) {
       toast.error("Each image must be under 5MB");
       return;
+    }
+
+    // NEW: check dimensions on each file, warn (once) if any are undersized
+    const dimensionChecks = await Promise.all(
+      files.map((f) => getImageDimensions(f).catch(() => null))
+    );
+    const hasSmallImage = dimensionChecks.some(
+      (d) => d && (d.width < 1600 || d.height < 1200)
+    );
+    if (hasSmallImage) {
+      toast(
+        "One or more images are smaller than the recommended 1600×1200px — they may look soft when displayed. Uploading anyway.",
+        { icon: "⚠️", duration: 5000 }
+      );
     }
 
     setIsUploading(true);
@@ -74,12 +89,12 @@ export default function MultiImageUploader({
 
   return (
     <div>
-      <label className="block text-sm font-medium dark:text-gray-300 mb-2">
-        {label}{" "}
-        <span className="dark:text-gray-500 font-normal">
-          ({value.length}/{maxImages})
-        </span>
-      </label>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+  {label}{" "}
+  <span className="text-gray-400 font-normal">
+    ({value.length}/{maxImages}) {value.length > 0 && value.length < 4 && "— add at least 4-5 for best presentation"}
+  </span>
+</label>
 
       {/* Existing images grid */}
       {value.length > 0 && (
@@ -133,9 +148,8 @@ export default function MultiImageUploader({
           }}
           onDragLeave={() => setDragActive(false)}
           onDrop={handleDrop}
-          className={`aspect-[16/6] rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors ${
-            dragActive ? "border-secondary bg-secondary/5" : "dark:border-gray-800 hover:border-secondary/50"
-          }`}
+          className={`aspect-[16/6] rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-colors ${dragActive ? "border-secondary bg-secondary/5" : "dark:border-gray-800 hover:border-secondary/50"
+            }`}
         >
           {isUploading ? (
             <>

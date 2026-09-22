@@ -76,12 +76,7 @@ export default function AdminSettingsPage() {
           Shown in the navbar, footer, and admin panel. Recommended: square or
           wide transparent PNG.
         </p>
-        <ImageUploader
-          value={logo}
-          onChange={setLogo}
-          folder="site-settings"
-          label="Logo"
-        />
+       <ImageUploader value={heroImage} onChange={setHeroImage} folder="site-settings" label="Hero Banner Image" minWidth={1920} minHeight={1080} />
       </div>
       <div className="card p-6">
         <h2 className="font-display font-semibold text-lg text-primary mb-1">

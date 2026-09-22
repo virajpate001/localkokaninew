@@ -101,12 +101,7 @@ export default function DestinationForm({ initialData = null }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
       <div className="card p-6 space-y-5">
-        <ImageUploader
-          value={image}
-          onChange={setImage}
-          folder="destinations"
-          label="Destination Image"
-        />
+       <ImageUploader value={image} onChange={setImage} folder="destinations" label="Destination Image" minWidth={1920} minHeight={1080} />
         {errors.image && <p className="text-red-500 text-xs">{errors.image}</p>}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

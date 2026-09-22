@@ -309,7 +309,7 @@ export default function HotelForm({ initialData = null }) {
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
       {/* Photos */}
       <div className="card p-6">
-        <MultiImageUploader value={images} onChange={setImages} folder="hotels" />
+       <MultiImageUploader value={images} onChange={setImages} folder="hotels" />
         {errors.images && <p className="text-red-500 text-xs mt-2">{errors.images}</p>}
       </div>
 
