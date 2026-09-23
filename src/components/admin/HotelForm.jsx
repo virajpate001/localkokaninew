@@ -609,7 +609,7 @@ export default function HotelForm({ initialData = null }) {
             🔒 Controlled by an active paid promotion until {formatShortDate(initialData.featuredUntil)}.{" "}
             <Link href="/admin/promotions" className="underline font-medium">Manage in Feature & Sponsor Management</Link>
           </p>
-        )}
+        )}  
 
           <label className={`flex items-center gap-2.5 ${isPremium ? "cursor-pointer" : "cursor-not-allowed opacity-50"}`}>
                     <input
