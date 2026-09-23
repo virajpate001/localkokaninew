@@ -611,6 +611,23 @@ export default function HotelForm({ initialData = null }) {
           </p>
         )}
 
+          <label className={`flex items-center gap-2.5 ${isPremium ? "cursor-pointer" : "cursor-not-allowed opacity-50"}`}>
+                    <input
+                        type="checkbox"
+                        name="verified"
+                        checked={formData.verified}
+                        disabled={!isPremium}
+                        onChange={handleChange}
+                        className="w-4 h-4 accent-secondary rounded"
+                    />
+                    <span className="text-sm text-gray-700 flex items-center gap-2">
+                        Premium Verified
+                        <span className="text-xs text-gray-400 font-normal">
+                            {isPremium ? "(shows a trust badge)" : "(Premium plan only)"}
+                        </span>
+                    </span> 
+                </label>
+
         <label className={`flex items-center gap-2.5 ${hasActiveSponsoredPromotion ? "cursor-not-allowed" : "cursor-pointer"}`}>
           <input
             type="checkbox"

@@ -293,7 +293,7 @@ export default function RestaurantForm({ initialData = null }) {
     return (
         <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
             <div className="card p-6">
-              
+
                 <MultiImageUploader value={images} onChange={setImages} folder="restaurants" />
                 {errors.images && <p className="text-red-500 text-xs mt-2">{errors.images}</p>}
             </div>
@@ -593,7 +593,7 @@ export default function RestaurantForm({ initialData = null }) {
                         <span className="text-xs text-gray-400 font-normal">
                             {isPremium ? "(shows a trust badge)" : "(Premium plan only)"}
                         </span>
-                    </span>
+                    </span> 
                 </label>
                 <label className={`flex items-center gap-2.5 ${hasActiveSponsoredPromotion ? "cursor-not-allowed" : "cursor-pointer"}`}>
                     <input

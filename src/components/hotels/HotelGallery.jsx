@@ -46,7 +46,7 @@ export default function HotelGallery({ images = [], hotelName }) {
           navigation
           thumbs={{ swiper: thumbsSwiper }}
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-          className="aspect-[21/9] rounded-2xl main-gallery-swiper"
+          className="aspect-[16/9] sm:aspect-[21/9] rounded-2xl main-gallery-swiper"
         >
           {galleryImages.map((img, i) => (
             <SwiperSlide key={i}>
