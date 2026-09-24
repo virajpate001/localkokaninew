@@ -20,7 +20,7 @@ export default function TouristPlacesSection({ places = [], destinationName }) {
     activeCategory === "All" ? validPlaces : validPlaces.filter((p) => p.category === activeCategory);
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white dark:bg-gray-950">
       <div className="container-custom">
         <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
           <h2 className="section-title">Tourist Places in {destinationName}</h2>
@@ -44,7 +44,7 @@ export default function TouristPlacesSection({ places = [], destinationName }) {
           )}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {filteredPlaces.map((place, index) => {
             const Icon = getCategoryIcon(place.category);
             return (
@@ -70,7 +70,7 @@ export default function TouristPlacesSection({ places = [], destinationName }) {
                   </div>
                 )}
                 <div className="p-5">
-                  <h3 className="font-display font-semibold text-primary">{place.name}</h3>
+                  <h3 className="font-display font-semibold text-primary dark:text-white">{place.name}</h3>
                   {place.description && (
                     <p className="text-gray-500 text-sm mt-1.5 leading-relaxed">{place.description}</p>
                   )}

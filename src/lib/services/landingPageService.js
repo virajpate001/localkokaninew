@@ -62,3 +62,25 @@ export async function resolveEntities(ids = [], getByIdFn) {
   const results = await Promise.all(ids.map((id) => getByIdFn(id).catch(() => null)));
   return results.filter(Boolean);
 }
+
+
+export async function resolveAttractionsSection(attractionsSection, getDestinationByIdFn) {
+  if (attractionsSection?.sourceDestinationId) {
+    const destination = await getDestinationByIdFn(attractionsSection.sourceDestinationId);
+    if (destination?.touristPlaces?.length > 0) {
+      return {
+        heading: attractionsSection.heading,
+        attractions: destination.touristPlaces
+          .filter((p) => p.name?.trim())
+          .map((p) => ({ name: p.name, image: p.image, description: p.description, category: p.category })),
+        sourceDestinationName: destination.name, // for admin/debug display, optional use
+      };
+    }
+  }
+
+  // Fallback: manually entered attractions, or empty
+  return {
+    heading: attractionsSection?.heading,
+    attractions: attractionsSection?.attractions || [],
+  };
+}

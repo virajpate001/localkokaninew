@@ -9,11 +9,12 @@ import ImageUploader from "./ImageUploader";
 import FaqEditor from "./FaqEditor";
 import EntityMultiSelect from "./EntityMultiSelect";
 import { createLandingPage, updateLandingPage } from "@/lib/services/landingPageService";
-import { getAllDestinations } from "@/lib/services/destinationService";
+import { getAllDestinations, getDestinationById } from "@/lib/services/destinationService";
 import { getAllHotels } from "@/lib/services/hotelService";
 import { getAllRestaurants } from "@/lib/services/restaurantService";
 import { slugify } from "@/utils/helpers";
 import { triggerRevalidation } from "@/utils/revalidate";
+import Link from "next/link";
 
 const inputClass = "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-secondary text-sm outline-none";
 
@@ -40,7 +41,10 @@ export default function LandingPageForm({ initialData = null }) {
   const [restaurantsSection, setRestaurantsSection] = useState(initialData?.restaurantsSection || { heading: "Featured Restaurants", description: "", restaurantIds: [] });
   const [whyBookSection, setWhyBookSection] = useState(initialData?.whyBookSection || { heading: "Why Book With Us", description: "", points: [] });
   const [exploreSection, setExploreSection] = useState(initialData?.exploreSection || { heading: "", content: "" });
-  const [attractionsSection, setAttractionsSection] = useState(initialData?.attractionsSection || { heading: "Popular Attractions", attractions: [] });
+  const [attractionsSection, setAttractionsSection] = useState(
+    initialData?.attractionsSection || { heading: "Popular Attractions", sourceDestinationId: null, attractions: [] }
+  );
+  const [destinationOptions, setDestinationOptions] = useState([]);
   const [weekendGetawaysSection, setWeekendGetawaysSection] = useState(initialData?.weekendGetawaysSection || { heading: "Weekend Getaways", description: "", destinationIds: [] });
   const [reviewsSection, setReviewsSection] = useState(initialData?.reviewsSection || { heading: "Customer Reviews", description: "" });
   const [ownerCtaSection, setOwnerCtaSection] = useState(initialData?.ownerCtaSection || { heading: "", description: "", ctaText: "Become a Partner", ctaLink: "/partner-with-us" });
@@ -113,7 +117,14 @@ export default function LandingPageForm({ initialData = null }) {
       seoContentSection,
       internalLinks: internalLinks.filter((l) => l.label.trim() && l.url.trim()),
       published: formData.published,
+      attractionsSection: {
+        heading: attractionsSection.heading,
+        sourceDestinationId: attractionsSection.sourceDestinationId || null,
+
+        attractions: attractionsSection.sourceDestinationId ? [] : attractionsSection.attractions,
+      },
       seo: { metaTitle: formData.metaTitle.trim(), metaDescription: formData.metaDescription.trim() },
+
     };
 
     try {
@@ -136,6 +147,22 @@ export default function LandingPageForm({ initialData = null }) {
       setIsSaving(false);
     }
   };
+
+  useEffect(() => {
+    getAllDestinations().then(setDestinationOptions);
+  }, []);
+
+  const [sourcePreviewCount, setSourcePreviewCount] = useState(null);
+
+  useEffect(() => {
+    if (attractionsSection.sourceDestinationId) {
+      getDestinationById(attractionsSection.sourceDestinationId).then((dest) => {
+        setSourcePreviewCount(dest?.touristPlaces?.filter((p) => p.name?.trim()).length || 0);
+      });
+    } else {
+      setSourcePreviewCount(null);
+    }
+  }, [attractionsSection.sourceDestinationId]);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
@@ -219,22 +246,77 @@ export default function LandingPageForm({ initialData = null }) {
 
       {/* Attractions */}
       <div className="card p-6 space-y-4">
-        <div className="flex items-center justify-between">
+        <div>
           <h3 className="font-display font-semibold text-primary">Popular Attractions</h3>
-          <button type="button" onClick={addAttraction} className="text-secondary text-sm font-medium hover:underline flex items-center gap-1"><FiPlus /> Add Attraction</button>
+          <p className="text-gray-400 text-xs mt-1">
+            Either pull attractions automatically from an existing destination's Tourist Places, or add them manually below.
+          </p>
         </div>
-        <input value={attractionsSection.heading} onChange={(e) => setAttractionsSection((p) => ({ ...p, heading: e.target.value }))} placeholder="Heading" className={inputClass} />
-        {attractionsSection.attractions.map((a, i) => (
-          <div key={i} className="border border-gray-200 rounded-xl p-3 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-400 uppercase">Attraction {i + 1}</span>
-              <button type="button" onClick={() => removeAttraction(i)} className="text-gray-400 hover:text-red-500"><FiTrash2 className="text-sm" /></button>
+
+        <input
+          value={attractionsSection.heading}
+          onChange={(e) => setAttractionsSection((p) => ({ ...p, heading: e.target.value }))}
+          placeholder="Heading"
+          className={inputClass}
+        />
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Pull From Destination <span className="text-gray-400 font-normal">(recommended — avoids duplicate entry)</span>
+          </label>
+          <select
+            value={attractionsSection.sourceDestinationId || ""}
+            onChange={(e) =>
+              setAttractionsSection((p) => ({ ...p, sourceDestinationId: e.target.value || null }))
+            }
+            className={inputClass + " bg-white"}
+          >
+            <option value="">None — enter attractions manually below</option>
+            {destinationOptions.map((dest) => (
+              <option key={dest.id} value={dest.id}>{dest.name}</option>
+            ))}
+          </select>
+
+          {attractionsSection.sourceDestinationId && (
+            <p className="text-xs mt-2">
+              {sourcePreviewCount === null ? (
+                <span className="text-gray-400">Checking...</span>
+              ) : sourcePreviewCount === 0 ? (
+                <span className="text-orange-500">
+                  ⚠️ This destination has no Tourist Places added yet — add some in{" "}
+                  <Link href="/admin/destinations" className="underline">Destinations</Link>, or switch to manual entry below.
+                </span>
+              ) : (
+                <span className="text-accent-dark">
+                  ✓ Will show {sourcePreviewCount} attraction{sourcePreviewCount !== 1 ? "s" : ""} automatically, kept in sync with the destination.
+                </span>
+              )}
+            </p>
+          )}
+        </div>
+
+        {/* Manual entry — only shown/editable when no source destination is selected */}
+        {!attractionsSection.sourceDestinationId && (
+          <div className="pt-2 border-t border-gray-100">
+            <div className="flex items-center justify-between mb-3">
+              <label className="block text-sm font-medium text-gray-700">Manual Attractions</label>
+              <button type="button" onClick={addAttraction} className="text-secondary text-sm font-medium hover:underline flex items-center gap-1">
+                <FiPlus /> Add Attraction
+              </button>
             </div>
-            <input value={a.name} onChange={(e) => updateAttraction(i, "name", e.target.value)} placeholder="Name" className={inputClass} />
-            <ImageUploader value={a.image} onChange={(img) => updateAttraction(i, "image", img)} folder="landing-pages" label="" />
-            <textarea value={a.description} onChange={(e) => updateAttraction(i, "description", e.target.value)} placeholder="Short description" rows={2} className={inputClass} />
+            {attractionsSection.attractions.map((a, i) => (
+              <div key={i} className="border border-gray-200 rounded-xl p-3 space-y-2 mb-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-400 uppercase">Attraction {i + 1}</span>
+                  <button type="button" onClick={() => removeAttraction(i)} className="text-gray-400 hover:text-red-500"><FiTrash2 className="text-sm" /></button>
+                </div>
+                <input value={a.name} onChange={(e) => updateAttraction(i, "name", e.target.value)} placeholder="Name" className={inputClass} />
+                <ImageUploader value={a.image} onChange={(img) => updateAttraction(i, "image", img)} folder="landing-pages" label="" />
+                <textarea value={a.description} onChange={(e) => updateAttraction(i, "description", e.target.value)} placeholder="Short description" rows={2} className={inputClass} />
+              </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
 
       {/* Weekend Getaways */}

@@ -18,6 +18,7 @@ import FaqAccordion from "@/components/ui/FaqAccordion";
 import JsonLd from "@/components/ui/JsonLd";
 import { generateFaqSchema } from "@/utils/helpers";
 import Testimonials from "@/components/home/Testimonials";
+import { resolveAttractionsSection } from "@/lib/services/landingPageService";
 
 export const revalidate = 3600;
 
@@ -54,6 +55,7 @@ export default async function LandingPage({ params }) {
     resolveEntities(page.hotelsSection?.hotelIds, getHotelById),
     resolveEntities(page.restaurantsSection?.restaurantIds, getRestaurantById),
     resolveEntities(page.weekendGetawaysSection?.destinationIds, getDestinationById),
+    resolveAttractionsSection(page.attractionsSection, getDestinationById),
   ]);
 
   const faqSchema = generateFaqSchema(page.faqs);
@@ -151,7 +153,10 @@ export default async function LandingPage({ params }) {
       )}
 
       {/* Popular Attractions */}
-      <AttractionsSection heading={page.attractionsSection?.heading} attractions={page.attractionsSection?.attractions} />
+       <AttractionsSection
+        heading={resolvedAttractions.heading}
+        attractions={resolvedAttractions.attractions}
+      /> 
 
       {/* Weekend Getaways */}
       {getawayDestinations.length > 0 && (

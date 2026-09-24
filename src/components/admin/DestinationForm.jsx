@@ -11,6 +11,7 @@ import { deleteFromCloudinary } from "@/lib/cloudinary";
 import { slugify } from "@/utils/helpers";
 import { triggerRevalidation } from "@/utils/revalidate";
 import TouristPlacesEditor from "./TouristPlacesEditor";
+import { getAllLandingPagesAdmin } from "@/lib/services/landingPageService";
 
 export default function DestinationForm({ initialData = null }) {
   const router = useRouter();
@@ -97,6 +98,18 @@ export default function DestinationForm({ initialData = null }) {
       }
 
       await triggerRevalidation(Array.from(pathsToRevalidate));
+
+      try {
+        const allLandingPages = await getAllLandingPagesAdmin();
+        const affectedSlugs = allLandingPages
+          .filter((p) => p.published && p.attractionsSection?.sourceDestinationId === initialData?.id)
+          .map((p) => `/${p.slug}`);
+        if (affectedSlugs.length > 0) {
+          await triggerRevalidation(affectedSlugs);
+        }
+      } catch (error) {
+        console.error("Landing page revalidation check failed:", error); // non-critical, don't block the save
+      }
 
       router.push("/admin/destinations");
       router.refresh();
