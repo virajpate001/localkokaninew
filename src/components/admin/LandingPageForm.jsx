@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { FiSave, FiLoader, FiPlus, FiTrash2 } from "react-icons/fi";
 import ImageUploader from "./ImageUploader";
