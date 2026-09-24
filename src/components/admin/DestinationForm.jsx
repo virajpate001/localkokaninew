@@ -106,7 +106,7 @@ export default function DestinationForm({ initialData = null }) {
           .map((p) => `/${p.slug}`);
         if (affectedSlugs.length > 0) {
           await triggerRevalidation(affectedSlugs);
-        }
+        } 
       } catch (error) {
         console.error("Landing page revalidation check failed:", error); // non-critical, don't block the save
       }
