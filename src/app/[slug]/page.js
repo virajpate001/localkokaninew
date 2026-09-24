@@ -50,12 +50,12 @@ export default async function LandingPage({ params }) {
 
   if (!page) notFound();
 
-  const [destinations, hotels, restaurants, getawayDestinations] = await Promise.all([
+   const [destinations, hotels, restaurants, getawayDestinations, resolvedAttractions] = await Promise.all([
     resolveEntities(page.destinationsSection?.destinationIds, getDestinationById),
     resolveEntities(page.hotelsSection?.hotelIds, getHotelById),
     resolveEntities(page.restaurantsSection?.restaurantIds, getRestaurantById),
     resolveEntities(page.weekendGetawaysSection?.destinationIds, getDestinationById),
-    resolveAttractionsSection(page.attractionsSection, getDestinationById),
+    resolveAttractionsSection(page.attractionsSection, getDestinationById), // ⬅️ ADD
   ]);
 
   const faqSchema = generateFaqSchema(page.faqs);
