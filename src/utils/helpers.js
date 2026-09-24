@@ -175,3 +175,24 @@ export function generateFaqSchema(faqs = []) {
     })),
   };
 }
+
+export function generateTouristPlacesSchema(places = [], destinationName) {
+  const validPlaces = places.filter((p) => p.name?.trim());
+  if (validPlaces.length === 0) return null;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Tourist Places in ${destinationName}`,
+    itemListElement: validPlaces.map((place, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "TouristAttraction",
+        name: place.name,
+        description: place.description || undefined,
+        image: place.image?.url || undefined,
+      },
+    })),
+  };
+}

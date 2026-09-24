@@ -10,10 +10,12 @@ import { createDestination, updateDestination } from "@/lib/services/destination
 import { deleteFromCloudinary } from "@/lib/cloudinary";
 import { slugify } from "@/utils/helpers";
 import { triggerRevalidation } from "@/utils/revalidate";
+import TouristPlacesEditor from "./TouristPlacesEditor";
 
 export default function DestinationForm({ initialData = null }) {
   const router = useRouter();
   const isEditMode = !!initialData;
+  const [touristPlaces, setTouristPlaces] = useState(initialData?.touristPlaces || []);
 
   const [formData, setFormData] = useState({
     name: initialData?.name || "",
@@ -64,6 +66,14 @@ export default function DestinationForm({ initialData = null }) {
         metaTitle: formData.metaTitle.trim(),
         metaDescription: formData.metaDescription.trim(),
       },
+      touristPlaces: touristPlaces
+        .filter((p) => p.name.trim())
+        .map((p) => ({
+          name: p.name.trim(),
+          category: p.category,
+          description: p.description.trim(),
+          image: p.image,
+        })),
     };
 
     try {
@@ -101,7 +111,7 @@ export default function DestinationForm({ initialData = null }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
       <div className="card p-6 space-y-5">
-       <ImageUploader value={image} onChange={setImage} folder="destinations" label="Destination Image" minWidth={1920} minHeight={1080} />
+        <ImageUploader value={image} onChange={setImage} folder="destinations" label="Destination Image" minWidth={1920} minHeight={1080} />
         {errors.image && <p className="text-red-500 text-xs">{errors.image}</p>}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -199,6 +209,10 @@ export default function DestinationForm({ initialData = null }) {
             className="w-full px-4 py-3 rounded-xl border dark:border-gray-800 focus:border-secondary text-sm outline-none transition-colors resize-none"
           />
         </div>
+      </div>
+
+      <div className="card p-6">
+        <TouristPlacesEditor value={touristPlaces} onChange={setTouristPlaces} />
       </div>
 
       <div className="flex items-center gap-3">

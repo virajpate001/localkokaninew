@@ -17,7 +17,9 @@ import { getSponsoredHotelsByDestination } from "@/lib/services/hotelService";
 import { getSponsoredRestaurantsByDestination } from "@/lib/services/restaurantService";
 import SponsoredListingsSection from "@/components/destinations/SponsoredListingsSection";
 import ShareButton from "@/components/ui/ShareButton";
-import ExpandableText from "@/components/ui/ExpandableText"; 
+import ExpandableText from "@/components/ui/ExpandableText";
+import TouristPlacesSection from "@/components/destinations/TouristPlacesSection";
+import { generateTouristPlacesSchema } from "@/utils/helpers";
 
 export const revalidate = 3600;
 
@@ -70,9 +72,12 @@ export default async function DestinationDetailPage({ params }) {
     hotels,
   );
 
+  const touristPlacesSchema = generateTouristPlacesSchema(destination.touristPlaces, destination.name);
+
   return (
     <>
       <JsonLd data={destinationSchema} />
+      {touristPlacesSchema && <JsonLd data={touristPlacesSchema} />}
 
       <div className="bg-primary dark:bg-gray-900">
         <Breadcrumbs
@@ -105,22 +110,20 @@ export default async function DestinationDetailPage({ params }) {
               <h1 className="font-display font-extrabold text-2xl md:text-3xl text-white">
                 {destination.name}
               </h1>
-             
-             <div className="flex items-center gap-3 mt-1">
-               <p className="flex items-center gap-1.5 text-white/90 text-sm font-medium mt-3">
-                <FiHome className="text-accent" />
-                {hotels.length} {hotels.length === 1 ? "hotel" : "hotels"}{" "}
-                
-              </p>
+
+              <div className="flex items-center gap-3 mt-1">
+                <p className="flex items-center gap-1.5 text-white/90 text-sm font-medium mt-3">
+                  <FiHome className="text-accent" />
+                  {hotels.length}{" "}
+                  {hotels.length === 1 ? "hotel" : "hotels"}{" "}
+                </p>
 
                 <p className="flex items-center gap-1.5 text-white/90 text-sm font-medium mt-3">
-                <FiCoffee className="text-accent" />
-                {restaurants.length} {restaurants.length === 1 ? "restaurant" : "restaurants"}{" "}
-                
-              </p>
-             </div>
-              
-              
+                  <FiCoffee className="text-accent" />
+                  {restaurants.length}{" "}
+                  {restaurants.length === 1 ? "restaurant" : "restaurants"}{" "}
+                </p>
+              </div>
             </div>
             <ShareButton
               title={destination.name}
@@ -138,9 +141,15 @@ export default async function DestinationDetailPage({ params }) {
           <h2 className="font-display font-bold text-2xl text-primary dark:text-white mb-4">
             About {destination.name}
           </h2>
-         <ExpandableText text={destination.description} lines={4} />
+          <ExpandableText text={destination.description} lines={4} />
         </div>
       </section>
+
+      {/* NEW: Tourist Places — right after About */}
+      <TouristPlacesSection
+        places={destination.touristPlaces}
+        destinationName={destination.name}
+      />
 
       {/* NEW: Sponsored Mixed Section — right after About, before Hotels */}
       <SponsoredListingsSection
