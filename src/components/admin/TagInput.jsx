@@ -10,7 +10,7 @@ const DEFAULT_SUGGESTED_TAGS = [
   "Gym", "Bar", "Pet Friendly", "Airport Shuttle", "Bonfire",
 ];
 
-export default function TagInput({
+export default function TagInput({ 
   value = [],
   onChange,
   label = "Amenities",
