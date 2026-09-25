@@ -787,5 +787,5 @@ export default function HotelForm({ initialData = null }) {
         </button>
       </div>
     </form>
-  );
+  ); 
 }
