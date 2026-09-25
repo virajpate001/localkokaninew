@@ -96,7 +96,7 @@ export default function ImageUploader({
           >
             <FiX />
           </button>
-        </div>
+        </div> 
       ) : (
         <div
           onClick={() => inputRef.current?.click()}

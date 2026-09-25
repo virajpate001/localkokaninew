@@ -195,4 +195,4 @@ export function generateTouristPlacesSchema(places = [], destinationName) {
       },
     })),
   };
-}
+} 

@@ -22,7 +22,7 @@ export default function AttractionsSection({ heading, attractions = [] }) {
                     <span className={`absolute top-3 left-3 flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-lg backdrop-blur-sm ${getCategoryColor(a.category)}`}>
                       <Icon className="text-xs" /> {a.category}
                     </span>
-                  )}
+                  )} 
                 </div>
                 <div className="p-4">
                   <h3 className="font-display font-semibold text-primary text-sm">{a.name}</h3>

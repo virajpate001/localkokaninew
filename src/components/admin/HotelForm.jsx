@@ -81,7 +81,7 @@ export default function HotelForm({ initialData = null }) {
     ownerId: initialData?.ownerId || (prefillOwnerId || null),
     ownerName: initialData?.ownerName || (prefillOwnerName || null),
 
-  });
+  }); 
 
   useEffect(() => {
     if (!initialData?.id) return;

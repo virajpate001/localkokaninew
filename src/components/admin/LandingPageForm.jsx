@@ -147,7 +147,7 @@ export default function LandingPageForm({ initialData = null }) {
     } finally {
       setIsSaving(false);
     }
-  };
+  }; 
 
   useEffect(() => {
     getAllDestinations().then(setDestinationOptions);

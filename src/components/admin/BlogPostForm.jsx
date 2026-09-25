@@ -126,7 +126,7 @@ export default function BlogPostForm({ initialData = null }) {
 } finally {
   setIsSaving(false);
 }
-  };
+  }; 
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">

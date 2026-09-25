@@ -134,7 +134,7 @@ export default async function DestinationDetailPage({ params }) {
             />
           </div>
         </div>
-      </section>
+      </section> 
 
       <section className="py-12 bg-white dark:bg-gray-900 border-b dark:border-gray-800">
         <div className="container-custom ">

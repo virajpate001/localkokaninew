@@ -18,7 +18,7 @@ function getImageDimensions(file) {
     img.onerror = reject;
     img.src = url;
   });
-}
+} 
 
 export default function MultiImageUploader({
   value = [],       // array of { url, publicId }

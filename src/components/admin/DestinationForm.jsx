@@ -95,7 +95,7 @@ export default function DestinationForm({ initialData = null }) {
       } else {
         await createDestination(payload);
         toast.success("Destination created");
-      }
+      } 
 
       await triggerRevalidation(Array.from(pathsToRevalidate));
 

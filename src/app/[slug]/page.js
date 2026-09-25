@@ -140,7 +140,7 @@ export default async function LandingPage({ params }) {
         heading={page.whyBookSection?.heading}
         description={page.whyBookSection?.description}
         points={page.whyBookSection?.points}
-      />
+      /> 
 
       {/* Explore Region (long-form markdown) */}
       {page.exploreSection?.content && (

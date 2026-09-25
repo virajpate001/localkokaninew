@@ -83,4 +83,4 @@ export async function resolveAttractionsSection(attractionsSection, getDestinati
     heading: attractionsSection?.heading,
     attractions: attractionsSection?.attractions || [],
   };
-}
+} 

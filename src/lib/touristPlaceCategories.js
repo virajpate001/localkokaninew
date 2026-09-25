@@ -9,7 +9,7 @@ export const CATEGORY_OPTIONS = [
   "Beach", "Religious", "Historical", "Fort", "Waterfall",
   "Nature", "Adventure", "Island", "Boating", "Other",
 ];
-
+ 
 const CATEGORY_ICONS = {
   Beach: GiBeachBucket,
   Religious: GiTempleGate,

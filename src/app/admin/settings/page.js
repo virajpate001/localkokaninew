@@ -81,7 +81,7 @@ export default function AdminSettingsPage() {
           onChange={setLogo}
           folder="site-settings"
           label="Logo"
-        />
+        /> 
       </div>
       <div className="card p-6">
         <h2 className="font-display font-semibold text-lg text-primary mb-1">

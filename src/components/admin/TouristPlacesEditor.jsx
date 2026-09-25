@@ -14,8 +14,7 @@ export default function TouristPlacesEditor({ value = [], onChange }) {
     const updated = [...value];
     updated[index] = { ...updated[index], [field]: fieldValue };
     onChange(updated);
-  };   
-
+  };    
   const removePlace = (index) => {
     onChange(value.filter((_, i) => i !== index));
   };
