@@ -26,6 +26,7 @@ import SponsoredListingsSection from "@/components/destinations/SponsoredListing
 import FaqAccordion from "@/components/ui/FaqAccordion";
 import ExpandableText from "@/components/ui/ExpandableText";
 import { buildMetadata } from "@/utils/seo"; // ⬅️ ADD
+import { SITE_NAME } from "@/lib/siteConfig";
 
 export const revalidate = 1800;
 

@@ -21,6 +21,7 @@ import ExpandableText from "@/components/ui/ExpandableText";
 import TouristPlacesSection from "@/components/destinations/TouristPlacesSection";
 import { generateTouristPlacesSchema } from "@/utils/helpers";
 import { buildMetadata } from "@/utils/seo";
+import { SITE_NAME } from "@/lib/siteConfig";
 
 export const revalidate = 3600;
 

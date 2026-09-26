@@ -21,7 +21,6 @@ import Testimonials from "@/components/home/Testimonials";
 import { resolveAttractionsSection } from "@/lib/services/landingPageService";
 import { buildMetadata } from "@/utils/seo";
 
-
 export const revalidate = 3600;
 
 export async function generateStaticParams() {

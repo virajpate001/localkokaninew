@@ -30,6 +30,7 @@ import FaqAccordion from "@/components/ui/FaqAccordion";
 import { generateFaqSchema } from "@/utils/helpers";
 import ExpandableText from "@/components/ui/ExpandableText";
 import { buildMetadata } from "@/utils/seo";
+import { SITE_NAME } from "@/lib/siteConfig";
 
 export async function generateStaticParams() {
   const restaurants = await getAllRestaurants();

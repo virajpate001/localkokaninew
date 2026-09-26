@@ -13,6 +13,7 @@ import MarkdownContent from "@/components/blog/MarkdownContent";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import JsonLd from "@/components/ui/JsonLd";
 import { buildMetadata } from "@/utils/seo";
+import { SITE_NAME } from "@/lib/siteConfig";
 
 export const revalidate = 3600;
 
