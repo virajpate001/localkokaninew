@@ -587,7 +587,7 @@ export default function RestaurantForm({ initialData = null }) {
                         disabled={!isPremium}
                         onChange={handleChange}
                         className="w-4 h-4 accent-secondary rounded"
-                    /> 
+                    />  
                     <span className="text-sm text-gray-700 flex items-center gap-2">
                         Premium Verified
                         <span className="text-xs text-gray-400 font-normal">
