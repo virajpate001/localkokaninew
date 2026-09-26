@@ -1,5 +1,5 @@
 // src/app/robots.js
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://localkokani.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com";
 
 export default function robots() {
   return {
@@ -7,7 +7,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: [
+        disallow: [ 
           "/admin/",           // admin panel — never public
           "/owner/",           // owner dashboard, login, signup — never public
           "/api/",             // all API routes

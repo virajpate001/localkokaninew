@@ -2,8 +2,8 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://localkokani.vercel.app";
+const BASE_URL = 
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com";
 import { getAllPublishedLandingPages } from "@/lib/services/landingPageService";
 
 export default async function sitemap() {

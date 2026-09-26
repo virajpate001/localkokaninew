@@ -17,7 +17,7 @@ import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-inter", 
   display: "swap",
 });
 
@@ -37,7 +37,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://localkokani.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com"),
   title: {
     default: `${SITE_NAME} | Book Hotels & Explore Top Destinations`,
     template: `%s | ${SITE_NAME}`,

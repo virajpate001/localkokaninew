@@ -121,14 +121,14 @@ export function generateDestinationCollectionSchema(destination, hotels) {
       })),
     },
   };
-}
+} 
 
 export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
       name: SITE_NAME,
-    url: "https://localkokani.vercel.app",
+    url: "https://www.localkokani.com",
     logo: "https://www.localkokani.com/logo.png",
     contactPoint: {
       "@type": "ContactPoint",
