@@ -2,20 +2,20 @@
 import { getAllHotels } from "@/lib/services/hotelService";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import HotelsFilterGrid from "@/components/hotels/HotelsFilterGrid";
+import { buildMetadata } from "@/utils/seo";
 
 
 export const revalidate = 1800; // 30 min — hotels list changes more often than destinations
 
-export const metadata = {
+
+
+export const metadata = buildMetadata({
   title: "All Hotels | Local Kokani",
-  description:
-    "Browse our full collection of handpicked hotels across India. Filter by price, rating, and amenities to find your perfect stay.",
-  alternates: { canonical: "/hotels" },
-  openGraph: {
-    title: "All Hotels | Local Kokani",
-    description: "Browse handpicked hotels across India's top destinations.",
-  },
-};
+  description: "Browse our full collection of handpicked hotels across India. Filter by price, rating, and amenities to find your perfect stay.",
+  path: "/hotels",
+});
+
+
 
 export default async function HotelsPage() {
   const hotels = await getAllHotels();

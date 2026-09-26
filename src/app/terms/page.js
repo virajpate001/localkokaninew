@@ -1,11 +1,15 @@
 // src/app/terms/page.js
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { buildMetadata } from "@/utils/seo";
 
-export const metadata = {
+
+
+
+export const metadata = buildMetadata({
   title: "Terms of Service | Local Kokani",
   description: "The terms and conditions governing your use of Local Kokani.",
-  alternates: { canonical: "/terms" },
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

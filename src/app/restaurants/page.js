@@ -2,14 +2,21 @@
 import { getAllRestaurants } from "@/lib/services/restaurantService";
 import RestaurantsFilterGrid from "@/components/restaurants/RestaurantsFilterGrid";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { buildMetadata } from "@/utils/seo";
 
 export const revalidate = 1800;
 
-export const metadata = {
+
+
+
+export const metadata = buildMetadata({
   title: "Restaurants | Local Kokani",
   description: "Discover handpicked restaurants across top destinations — from fine dining to local favorites.",
-  alternates: { canonical: "/restaurants" },
-};
+  path: "/restaurants",
+});
+
+
+
 
 export default async function RestaurantsPage() {
   const restaurants = await getAllRestaurants();

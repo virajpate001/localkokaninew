@@ -3,13 +3,16 @@ import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ContactForm from "@/components/contact/ContactForm";
+import { buildMetadata } from "@/utils/seo";
 
 
-export const metadata = {
+
+
+export const metadata = buildMetadata({
   title: "Contact Us | Local Kokani",
   description: "Get in touch with the Local Kokani team — questions, feedback, or partnership enquiries.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;

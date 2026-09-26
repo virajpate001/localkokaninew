@@ -5,20 +5,22 @@ import { FiHome, FiMapPin, FiCoffee } from "react-icons/fi";
 import { getAllDestinations } from "@/lib/services/destinationService";
 import EmptyState from "@/components/ui/EmptyState";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { buildMetadata } from "@/utils/seo";
+
 
 export const revalidate = 3600;
 
-export const metadata = {
+
+
+export const metadata = buildMetadata({
   title: "All Destinations | Local Kokani",
-  description:
-    "Browse handpicked destinations across India — from beaches to mountains to heritage cities. Find your perfect hotel in every top location.",
-  alternates: { canonical: "/destinations" },
-  openGraph: {
-    title: "All Destinations | Local Kokani",
-    description:
-      "Browse handpicked destinations across India and find your perfect stay.",
-  },
-};
+  description: "Browse handpicked destinations across India — from beaches to mountains to heritage cities. Find your perfect hotel in every top location.",
+  path: "/destinations",
+});
+
+
+
+
 
 export default async function DestinationsPage() {
   const destinations = await getAllDestinations();

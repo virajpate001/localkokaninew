@@ -29,6 +29,7 @@ import SponsoredListingsSection from "@/components/destinations/SponsoredListing
 import FaqAccordion from "@/components/ui/FaqAccordion";
 import { generateFaqSchema } from "@/utils/helpers";
 import ExpandableText from "@/components/ui/ExpandableText";
+import { buildMetadata } from "@/utils/seo";
 
 export async function generateStaticParams() {
   const restaurants = await getAllRestaurants();
@@ -38,23 +39,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const restaurant = await getRestaurantBySlug(slug);
+  if (!restaurant || restaurant.status !== "active") return { title: "Restaurant Not Found" };
 
-if (!restaurant || restaurant.status !== "active") {
-    return { title: "Restaurant Not Found | Local Kokani" };
-  }
-
-  const title = `${restaurant.name} | ${restaurant.destinationName} | Local Kokani`;
-  const description =
-    restaurant.description?.slice(0, 155) ||
-    `Reserve a table at ${restaurant.name}.`;
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/restaurants/${restaurant.slug}` },
-    openGraph: { title, description, type: "website" },
-    twitter: { card: "summary_large_image", title, description },
-  };
+  return buildMetadata({
+    title: `${restaurant.name} | ${restaurant.destinationName} | ${SITE_NAME}`,
+    description: restaurant.description?.slice(0, 155) || `Reserve a table at ${restaurant.name}.`,
+    path: `/restaurants/${restaurant.slug}`,
+    image: restaurant.images?.[0]?.url,
+  });
 }
 
 export default async function RestaurantDetailPage({ params }) {

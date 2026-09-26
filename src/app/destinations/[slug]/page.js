@@ -20,6 +20,7 @@ import ShareButton from "@/components/ui/ShareButton";
 import ExpandableText from "@/components/ui/ExpandableText";
 import TouristPlacesSection from "@/components/destinations/TouristPlacesSection";
 import { generateTouristPlacesSchema } from "@/utils/helpers";
+import { buildMetadata } from "@/utils/seo";
 
 export const revalidate = 3600;
 
@@ -31,25 +32,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);
+  if (!destination) return { title: "Destination Not Found" };
 
-  if (!destination) {
-    return { title: "Destination Not Found | Local Kokani" };
-  }
+  const title = destination.seo?.metaTitle || `Best Hotels in ${destination.name} | ${SITE_NAME}`;
+  const description = destination.seo?.metaDescription || `Explore ${destination.hotelCount || "top"} handpicked hotels in ${destination.name}.`;
 
-  return {
-    title:
-      destination.seo?.metaTitle ||
-      `Best Hotels in ${destination.name} | Local Kokani`,
-    description:
-      destination.seo?.metaDescription ||
-      `Explore ${destination.hotelCount || "top"} handpicked hotels in ${destination.name}. ${destination.description?.slice(0, 100)}`,
-    alternates: { canonical: `/destinations/${destination.slug}` },
-    openGraph: {
-      title: `Best Hotels in ${destination.name} | Local Kokani`,
-      description: destination.description,
-      images: destination.image?.url ? [destination.image.url] : [],
-    },
-  };
+  return buildMetadata({
+    title,
+    description,
+    path: `/destinations/${destination.slug}`,
+    image: destination.image?.url,
+  });
 }
 
 export default async function DestinationDetailPage({ params }) {

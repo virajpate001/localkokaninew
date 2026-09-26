@@ -12,6 +12,7 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MarkdownContent from "@/components/blog/MarkdownContent";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import JsonLd from "@/components/ui/JsonLd";
+import { buildMetadata } from "@/utils/seo";
 
 export const revalidate = 3600;
 
@@ -32,26 +33,15 @@ function formatDate(isoString) {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getPublishedPostBySlug(slug);
+  if (!post) return { title: "Article Not Found" };
 
-  if (!post) {
-    return { title: "Article Not Found | Local Kokani" };
-  }
-
-  const title = post.seo?.metaTitle || `${post.title} | Local Kokani Blog`;
-  const description = post.seo?.metaDescription || post.excerpt;
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime: post.publishedAt,
-    },
-    twitter: { card: "summary_large_image", title, description },
-  };
+  return buildMetadata({
+    title: post.seo?.metaTitle || `${post.title} | ${SITE_NAME} Blog`,
+    description: post.seo?.metaDescription || post.excerpt,
+    path: `/blog/${post.slug}`,
+    image: post.coverImage?.url,
+    type: "article",
+  });
 }
 
 export default async function BlogPostPage({ params }) {

@@ -2,6 +2,7 @@
 import { searchAllFull } from "@/lib/services/searchService";
 import SearchResultsClient from "@/components/search/SearchResultsClient";
 
+
 export async function generateMetadata({ searchParams }) {
   const { q } = await searchParams;
   const query = q || "";
@@ -14,6 +15,8 @@ export async function generateMetadata({ searchParams }) {
     robots: { index: false, follow: true }, // search result pages shouldn't be indexed
   };
 }
+
+
 
 export default async function SearchPage({ searchParams }) {
   const { q } = await searchParams;

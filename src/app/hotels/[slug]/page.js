@@ -25,6 +25,7 @@ import { getSponsoredRestaurantsByDestination } from "@/lib/services/restaurantS
 import SponsoredListingsSection from "@/components/destinations/SponsoredListingsSection";
 import FaqAccordion from "@/components/ui/FaqAccordion";
 import ExpandableText from "@/components/ui/ExpandableText";
+import { buildMetadata } from "@/utils/seo"; // ⬅️ ADD
 
 export const revalidate = 1800;
 
@@ -41,26 +42,15 @@ export async function generateMetadata({ params }) {
     return { title: "Hotel Not Found | Local Kokani" };
   }
 
-  const title = `${hotel.name} | ${hotel.destinationName} | Local Kokani`;
-  const description =
-    hotel.description?.slice(0, 155) ||
-    `Book ${hotel.name} in ${hotel.destinationName}. Verified stay, best price guarantee.`;
+  const title = `${hotel.name} | ${hotel.destinationName} | ${SITE_NAME}`;
+  const description = hotel.description?.slice(0, 155) || `Book ${hotel.name} in ${hotel.destinationName}. Verified stay, best price guarantee.`;
 
-  return {
+  return buildMetadata({ 
     title,
     description,
-    alternates: { canonical: `/hotels/${hotel.slug}` },
-    openGraph: {
-      title,
-      description,
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-  };
+    path: `/hotels/${hotel.slug}`,
+    image: hotel.images?.[0]?.url,
+  });
 }
 
 export default async function HotelDetailPage({ params }) {

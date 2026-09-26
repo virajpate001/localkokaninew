@@ -2,12 +2,15 @@
 import Image from "next/image";
 import { FiMapPin, FiHeart, FiUsers, FiTrendingUp } from "react-icons/fi";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { buildMetadata } from "@/utils/seo";
 
-export const metadata = {
-  title: "About Us | Local Kokani",
+
+
+export const metadata = buildMetadata({
+  title: "About Us | Local Kokan",
   description: "Learn about Local Kokani's mission to connect travelers with handpicked hotels and restaurants across India.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 const stats = [
   { value: "50+", label: "Destinations" },

@@ -1,8 +1,12 @@
 // src/app/wishlist/page.js
-export const metadata = {
+import { buildMetadata } from "@/utils/seo";
+
+export const metadata = buildMetadata({
   title: "My Wishlist | Local Kokani",
-  robots: { index: false, follow: true },
-};
+  path: "/wishlist",
+  noIndex: true,
+});
+
 
 import WishlistPageClient from "@/components/wishlist/WishlistPageClient";
 

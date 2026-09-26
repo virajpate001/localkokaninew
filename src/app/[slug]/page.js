@@ -19,6 +19,8 @@ import JsonLd from "@/components/ui/JsonLd";
 import { generateFaqSchema } from "@/utils/helpers";
 import Testimonials from "@/components/home/Testimonials";
 import { resolveAttractionsSection } from "@/lib/services/landingPageService";
+import { buildMetadata } from "@/utils/seo";
+
 
 export const revalidate = 3600;
 
@@ -32,16 +34,12 @@ export async function generateMetadata({ params }) {
   const page = await getPublishedLandingPageBySlug(slug);
   if (!page) return { title: "Page Not Found" };
 
-  const title = page.seo?.metaTitle || page.h1;
-  const description = page.seo?.metaDescription || page.subtitle;
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/${page.slug}` },
-    openGraph: { title, description, images: page.heroImage?.url ? [page.heroImage.url] : [] },
-    twitter: { card: "summary_large_image", title, description },
-  };
+  return buildMetadata({
+    title: page.seo?.metaTitle || page.h1,
+    description: page.seo?.metaDescription || page.subtitle,
+    path: `/${page.slug}`,
+    image: page.heroImage?.url,
+  });
 }
 
 export default async function LandingPage({ params }) {

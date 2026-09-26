@@ -1,11 +1,15 @@
 // src/app/privacy-policy/page.js
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import { buildMetadata } from "@/utils/seo";
 
-export const metadata = {
+
+
+
+export const metadata = buildMetadata({
   title: "Privacy Policy | Local Kokani",
   description: "How Local Kokani collects, uses, and protects your personal information.",
-  alternates: { canonical: "/privacy-policy" },
-};
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (
