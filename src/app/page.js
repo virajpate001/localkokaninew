@@ -7,6 +7,8 @@ import FeaturedRestaurants from "@/components/home/FeaturedRestaurants";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import CtaBanner from "@/components/home/CtaBanner";
 import { getSiteSettings } from "@/lib/services/settingsService";
+import { buildMetadata } from "@/utils/seo";
+
 
 // Dynamically import Testimonials since Swiper's JS isn't needed until scrolled into view
 const Testimonials = dynamic(() => import("@/components/home/Testimonials"), {
@@ -15,11 +17,17 @@ const Testimonials = dynamic(() => import("@/components/home/Testimonials"), {
 
 export const revalidate = 3600; // regenerate page every 1 hour
 
-export const metadata = {
+// export const metadata = {
+//   title: "Local Kokani | Book Hotels , Restaurants & Explore Top Destinations",
+//   description:
+//     "Discover handpicked hotels & restaurants across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
+// };
+
+export const metadata = buildMetadata({
   title: "Local Kokani | Book Hotels , Restaurants & Explore Top Destinations",
-  description:
-    "Discover handpicked hotels across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
-};
+  description: "Discover handpicked hotels & restaurants across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
+  path: "/",
+});
 
 export default async function HomePage() {
   const settings = await getSiteSettings();

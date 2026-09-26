@@ -3,14 +3,14 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Local Kokani - Book Hotels , Restaurants & Explore Destinations";
+export const alt = "Local Kokani | Book Hotels , Restaurants & Explore Top Destinations";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
   return new ImageResponse(
     (
-      <div
+      <div 
         style={{
           height: "100%",
           width: "100%",
@@ -41,7 +41,7 @@ export default async function Image() {
           </span>
         </div>
         <p style={{ fontSize: "30px", color: "rgba(255,255,255,0.85)" }}>
-          Find Your Perfect Stay, Anywhere You Go
+          Stay With Locals in Kokan, Book Hotels & Restaurants, Explore Destinations
         </p>
       </div>
     ),

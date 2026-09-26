@@ -1,7 +1,8 @@
 // src/utils/seo.js
 import { SITE_NAME } from "@/lib/siteConfig";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com";
 
 /**
  * Builds a complete, consistent metadata object for any page.
