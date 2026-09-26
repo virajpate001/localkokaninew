@@ -136,7 +136,7 @@ export default async function HotelDetailPage({ params }) {
               <ShareButton
                 title={hotel.name}
                 text={`Check out ${hotel.name} in ${hotel.destinationName} on Local Kokani`}
-                url={`https://localkokani.vercel.app/hotels/${hotel.slug}`}
+                url={`https://www.localkokani.com/hotels/${hotel.slug}`}
                 variant="button"
               />
               <WishlistButton

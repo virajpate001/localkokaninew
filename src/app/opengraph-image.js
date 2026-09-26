@@ -3,7 +3,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Local Kokani - Book Hotels & Explore Destinations";
+export const alt = "Local Kokani - Book Hotels , Restaurants & Explore Destinations";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

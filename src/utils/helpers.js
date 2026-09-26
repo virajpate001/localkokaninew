@@ -6,7 +6,7 @@ export function generateHotelSchema(hotel) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Hotel",
-    "@id": `https://localkokani.vercel.app/hotels/${hotel.slug}`,
+    "@id": `https://www.localkokani.com/hotels/${hotel.slug}`,
     name: hotel.name,
     description: hotel.description || "",
     address: {
@@ -109,14 +109,14 @@ export function generateDestinationCollectionSchema(destination, hotels) {
     "@type": "CollectionPage",
     name: `Hotels in ${destination.name}`,
     description: destination.description,
-    url: `https://localkokani.vercel.app/destinations/${destination.slug}`,
+    url: `https://www.localkokani.com/destinations/${destination.slug}`,
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: hotels.length,
       itemListElement: hotels.slice(0, 20).map((hotel, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `https://localkokani.vercel.app/hotels/${hotel.slug}`,
+        url: `https://www.localkokani.com/hotels/${hotel.slug}`,
         name: hotel.name,
       })),
     },
@@ -129,7 +129,7 @@ export function generateOrganizationSchema() {
     "@type": "Organization",
       name: SITE_NAME,
     url: "https://localkokani.vercel.app",
-    logo: "https://localkokani.vercel.app/logo.png",
+    logo: "https://www.localkokani.com/logo.png",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
