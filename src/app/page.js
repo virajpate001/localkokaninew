@@ -24,7 +24,7 @@ export const revalidate = 3600; // regenerate page every 1 hour
 // };
 
 export const metadata = buildMetadata({
-  title: "Local Kokani | Book Hotels , Restaurants & Explore Top Destinations",
+  title: "Local Kokani | Book Hotels , Restaurants in Kokan",
   description: "Discover handpicked hotels & restaurants across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
   path: "/",
 });

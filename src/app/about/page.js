@@ -10,6 +10,7 @@ export const metadata = buildMetadata({
   title: "About Us | Local Kokan",
   description: "Learn about Local Kokani's mission to connect travelers with handpicked hotels and restaurants across India.",
   path: "/about",
+  image: "/images/test1.webp", // You can specify a custom OG image for the About page if desired
 });
 
 const stats = [

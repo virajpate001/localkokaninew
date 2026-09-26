@@ -17,7 +17,7 @@ import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter", 
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -37,13 +37,15 @@ const fraunces = Fraunces({
 });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com",
+  ),
   title: {
-    default: `${SITE_NAME} | Book Hotels & Explore Top Destinations`,
+    default: `${SITE_NAME} | Book Hotels & Restaurants in Kokan`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Discover handpicked hotels across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
+    "Discover handpicked hotels & restaurants across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
   keywords: ["hotel booking", "destinations", "travel", "hotels"],
   openGraph: {
     type: "website",
@@ -52,8 +54,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Book Hotels & Explore Top Destinations`,
-    description: "Discover handpicked hotels across top destinations. Best prices, verified stays.",
+    title: `${SITE_NAME} | Book Hotels & Restaurants in Kokan`,
+    description:
+      "Discover handpicked hotels & restaurants across top destinations. Best prices, verified stays.",
   },
   robots: { index: true, follow: true },
 };
@@ -62,7 +65,10 @@ export default async function RootLayout({ children }) {
   const settings = await getSiteSettings();
 
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} ${fraunces.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${poppins.variable} ${fraunces.variable}`}
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -83,8 +89,8 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased transition-colors">
-        
-         <a href="#main-content"
+        <a
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
         >
           Skip to main content

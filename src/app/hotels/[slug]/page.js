@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
     path: `/hotels/${hotel.slug}`,
     image: hotel.images?.[0]?.url,
   });
-}
+} 
 
 export default async function HotelDetailPage({ params }) {
   const { slug } = await params;
