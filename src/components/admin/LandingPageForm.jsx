@@ -147,7 +147,7 @@ export default function LandingPageForm({ initialData = null }) {
     } finally {
       setIsSaving(false);
     }
-  }; 
+  };
 
   useEffect(() => {
     getAllDestinations().then(setDestinationOptions);
@@ -379,6 +379,15 @@ export default function LandingPageForm({ initialData = null }) {
         <h3 className="font-display font-semibold text-primary">SEO Meta Tags</h3>
         <input name="metaTitle" value={formData.metaTitle} onChange={handleChange} placeholder="Meta title (optional, defaults to H1)" className={inputClass} />
         <textarea name="metaDescription" value={formData.metaDescription} onChange={handleChange} placeholder="Meta description (optional, defaults to subtitle)" rows={2} className={inputClass} />
+        <input
+          name="metaKeywords"
+          value={formData.metaKeywords}
+          onChange={handleChange}
+          placeholder="hotels in konkan, konkan beach resorts, konkan homestays"
+          className={inputClass}
+        />
+        <p className="text-gray-400 text-xs -mt-2">Comma-separated. Low SEO impact on Google specifically, but harmless and used by some other search engines.</p>
+
         <label className="flex items-center gap-2.5 cursor-pointer">
           <input type="checkbox" name="published" checked={formData.published} onChange={handleChange} className="w-4 h-4 accent-secondary rounded" />
           <span className="text-sm text-gray-700">Publish this page</span>

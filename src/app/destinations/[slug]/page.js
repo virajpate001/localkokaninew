@@ -43,6 +43,12 @@ export async function generateMetadata({ params }) {
     description,
     path: `/destinations/${destination.slug}`,
     image: destination.image?.url,
+    keywords: [
+    `hotels in ${destination.name}`,
+    `${destination.name} tourism`,
+    `places to visit in ${destination.name}`,
+    `${destination.name} ${destination.country}`,
+  ],
   });
 }
 

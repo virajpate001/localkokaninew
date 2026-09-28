@@ -38,6 +38,7 @@ export async function generateMetadata({ params }) {
     description: page.seo?.metaDescription || page.subtitle,
     path: `/${page.slug}`,
     image: page.heroImage?.url,
+    keywords: page.seo?.keywords ? page.seo.keywords.split(",").map((k) => k.trim()) : [],
   });
 }
 

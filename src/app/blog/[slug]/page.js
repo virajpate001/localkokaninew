@@ -42,6 +42,7 @@ export async function generateMetadata({ params }) {
     path: `/blog/${post.slug}`,
     image: post.coverImage?.url,
     type: "article",
+    keywords: [post.title, post.category, post.destinationName].filter(Boolean),
   });
 }
 

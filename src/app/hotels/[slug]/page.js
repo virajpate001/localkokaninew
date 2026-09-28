@@ -51,6 +51,12 @@ export async function generateMetadata({ params }) {
     description,
     path: `/hotels/${hotel.slug}`,
     image: hotel.images?.[0]?.url,
+    keywords: [ // ⬅️ ADD — derived from real listing data, not generic
+    hotel.name,
+    `hotels in ${hotel.destinationName}`,
+    `${hotel.destinationName} accommodation`,
+    ...(hotel.amenities || []).slice(0, 3),
+  ],
   });
 } 
 

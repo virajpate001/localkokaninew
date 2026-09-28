@@ -4,6 +4,8 @@ import { SITE_NAME } from "@/lib/siteConfig";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.localkokani.com";
 
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.png`;
+
 /**
  * Builds a complete, consistent metadata object for any page.
  * Always includes og:site_name, og:locale, og:type, og:url, and canonical —
@@ -16,12 +18,14 @@ export function buildMetadata({
   image,
   type = "website",
   noIndex = false,
+  keywords = [],
 }) {
   const url = `${SITE_URL}${path}`;
-
+  const ogImage = image || DEFAULT_OG_IMAGE;
   return {
     title,
     description,
+    keywords: keywords.length > 0 ? keywords : undefined,
     alternates: {
       canonical: path,
     },
@@ -32,7 +36,7 @@ export function buildMetadata({
       siteName: SITE_NAME,
       locale: "en_US",
       type,
-      ...(image ? { images: [{ url: image, width: 1200, height: 630 }] } : {}),
+      images: [{ url: ogImage, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
