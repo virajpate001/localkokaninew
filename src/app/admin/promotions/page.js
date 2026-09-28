@@ -185,7 +185,7 @@ export default function AdminPromotionsPage() {
       setProcessingId(null);
       setEndEarlyTarget(null);
     }
-  };
+  }; 
 
   const buildNotifyMessage = (request, ownerName) => {
     const propertyLabel =
