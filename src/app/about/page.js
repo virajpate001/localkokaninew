@@ -10,7 +10,7 @@ export const metadata = buildMetadata({
   title: "About Us | Local Kokan",
   description: "Learn about Local Kokani's mission to connect travelers with handpicked hotels and restaurants across India.",
   path: "/about",
-  
+  keywords: ["Local Kokani", "About Us", "Travel", "Hotels", "Restaurants"],
 });
 
 const stats = [
@@ -40,7 +40,7 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-secondary dark:bg-gray-900">
         <Breadcrumbs items={[{ name: "About Us", url: "/about" }]} />
       </div>
 
@@ -58,10 +58,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-14 bg-white dark:bg-gray-900">
         <div className="container-custom max-w-3xl">
-          <h2 className="font-display font-bold text-2xl text-primary mb-4">Our Story</h2>
-          <div className="space-y-4 text-gray-600 leading-relaxed">
+          <h2 className="font-display font-bold text-2xl text-primary section-title mb-4">Our Story</h2>
+          <div className="space-y-4 text-gray-600 leading-relaxed dark:text-gray-300">
             <p>
               Local Kokani started with a simple frustration: booking a hotel or finding a good local
               restaurant while traveling in India often meant sifting through outdated listings, fake
@@ -82,13 +82,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50">
+      <section className="py-14 bg-blue-50 dark:bg-gray-950 overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center mb-16">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <p className="font-display font-extrabold text-4xl text-primary">{stat.value}</p>
-                <p className="text-gray-500 text-sm mt-1">{stat.label}</p>
+                <p className="font-display font-extrabold text-4xl text-primary dark:text-white">{stat.value}</p>
+                <p className="text-gray-500 text-sm mt-1 dark:text-gray-300">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -97,10 +97,10 @@ export default function AboutPage() {
             {values.map((value) => (
               <div key={value.title} className="card p-6">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                  <value.icon className="text-primary text-xl" />
+                  <value.icon className="text-primary text-xl dark:text-white" />
                 </div>
-                <h3 className="font-display font-semibold text-lg text-primary">{value.title}</h3>
-                <p className="text-gray-500 text-sm mt-2 leading-relaxed">{value.description}</p>
+                <h3 className="font-display font-semibold text-lg text-primary dark:text-white">{value.title}</h3>
+                <p className="text-gray-500 text-sm mt-2 leading-relaxed dark:text-gray-300">{value.description}</p>
               </div>
             ))}
           </div>

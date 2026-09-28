@@ -16,6 +16,7 @@ export const metadata = buildMetadata({
   title: "All Destinations | Local Kokani",
   description: "Browse handpicked destinations across India — from beaches to mountains to heritage cities. Find your perfect hotel in every top location.",
   path: "/destinations",
+  keywords: ["destinations", "travel", "tourism", "hotels"],
 });
 
 

@@ -27,6 +27,7 @@ export const metadata = buildMetadata({
   title: "Local Kokani | Book Hotels , Restaurants in Kokan",
   description: "Discover handpicked hotels & restaurants across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
   path: "/",
+  keywords: ["hotel booking", "destinations", "travel", "hotels","local kokani","kokan tourism","kokan hotels","kokan restaurants"],
 });
 
 export default async function HomePage() {

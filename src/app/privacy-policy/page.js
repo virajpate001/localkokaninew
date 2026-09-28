@@ -9,16 +9,17 @@ export const metadata = buildMetadata({
   title: "Privacy Policy | Local Kokani",
   description: "How Local Kokani collects, uses, and protects your personal information.",
   path: "/privacy-policy",
+  keywords: ["privacy policy", "data protection", "personal information", "user privacy"],
 });
 
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-secondary dark:bg-gray-900">
         <Breadcrumbs items={[{ name: "Privacy Policy", url: "/privacy-policy" }]} />
       </div>
 
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white ">
         <div className="container-custom max-w-3xl">
           <h1 className="font-display font-extrabold text-3xl md:text-4xl text-primary mb-2">
             Privacy Policy

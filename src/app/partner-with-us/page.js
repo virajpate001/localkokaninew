@@ -11,6 +11,7 @@ export const metadata = buildMetadata({
   title: "Partner With Us | Local Kokani",
   description: "List your hotel or restaurant on Local Kokani and reach more guests.",
   path: "/partner-with-us",
+  keywords: ["partner with us", "hotel listing", "restaurant listing", "business partnership"],
 });
 
 export default function OldRegisterRedirect() {

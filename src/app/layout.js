@@ -44,7 +44,7 @@ export const metadata = {
     default: `${SITE_NAME} | Book Hotels & Restaurants in Kokan`,
     template: `%s | ${SITE_NAME}`,
   },
-  description:
+  description: 
     "Discover handpicked hotels & restaurants across top destinations. Best prices, verified stays, instant WhatsApp booking assistance.",
   keywords: ["hotel booking", "destinations", "travel", "hotels"],
   openGraph: {

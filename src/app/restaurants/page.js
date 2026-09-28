@@ -13,6 +13,7 @@ export const metadata = buildMetadata({
   title: "Restaurants | Local Kokani",
   description: "Discover handpicked restaurants across top destinations — from fine dining to local favorites.",
   path: "/restaurants",
+  keywords: ["restaurants", "restaurant booking", "dining", "food", "cuisine"],
 });
 
 

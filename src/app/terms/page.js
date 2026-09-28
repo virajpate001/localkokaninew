@@ -9,12 +9,13 @@ export const metadata = buildMetadata({
   title: "Terms of Service | Local Kokani",
   description: "The terms and conditions governing your use of Local Kokani.",
   path: "/terms",
+  keywords: ["terms of service", "user agreement", "legal", "conditions of use"],
 });
 
 export default function TermsPage() {
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-secondary dark:bg-gray-900 ">
         <Breadcrumbs items={[{ name: "Terms of Service", url: "/terms" }]} />
       </div>
 

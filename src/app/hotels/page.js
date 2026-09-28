@@ -13,6 +13,7 @@ export const metadata = buildMetadata({
   title: "All Hotels | Local Kokani",
   description: "Browse our full collection of handpicked hotels across India. Filter by price, rating, and amenities to find your perfect stay.",
   path: "/hotels",
+  keywords: ["hotels", "hotel booking", "accommodation", "travel", "tourism"],
 });
 
 
