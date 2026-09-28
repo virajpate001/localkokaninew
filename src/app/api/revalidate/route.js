@@ -1,10 +1,14 @@
 // src/app/api/revalidate/route.js
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache"; // ⬅️ add revalidateTag
+import { verifyAdmin } from "@/lib/firebaseAdmin";
 
 export async function POST(request) {
   try {
+    const admin = await verifyAdmin(request);
     const { paths, tags } = await request.json(); // ⬅️ accept optional tags array
+
+    if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     if (paths && Array.isArray(paths)) {
       paths.forEach((path) => revalidatePath(path));

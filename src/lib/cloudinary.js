@@ -1,6 +1,7 @@
 // src/lib/cloudinary.js
 export const CLOUDINARY_CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 export const CLOUDINARY_UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+import { auth } from "@/lib/firebase";
 
 // Client-side unsigned upload function (used in Admin panel)
 export async function uploadToCloudinary(file, folder = "general") {
@@ -33,9 +34,10 @@ export function getOptimizedUrl(url, { width = 800, quality = "auto" } = {}) {
 export async function deleteFromCloudinary(publicId) {
   if (!publicId) return;
   try {
+    const token = await auth.currentUser?.getIdToken();
     await fetch("/api/cloudinary/delete", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({ publicId }),
     });
   } catch (error) {

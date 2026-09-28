@@ -1,6 +1,7 @@
 // src/app/api/cloudinary/delete/route.js
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { verifyAdmin } from "@/lib/firebaseAdmin";
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -11,6 +12,9 @@ cloudinary.config({
 export async function POST(request) {
   try {
     const { publicId } = await request.json();
+    const admin = await verifyAdmin(request);
+
+    if (!admin) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     if (!publicId) {
       return NextResponse.json({ error: "publicId is required" }, { status: 400 });

@@ -31,6 +31,7 @@ import { activateScheduledPromotions } from "@/lib/services/promotionService";
 import { getOwnerById } from "@/lib/services/ownerService";
 import CronStatusIndicator from "@/components/admin/CronStatusIndicator";
 import { getCronRunStatus } from "@/lib/services/promotionService";
+import { auth } from "@/lib/firebase";
 
 const tabs = [
   { value: "pending_payment", label: "Pending" },
@@ -224,13 +225,17 @@ export default function AdminPromotionsPage() {
       toast.error("Failed to load owner's contact details");
     } finally {
       setNotifyingId(null);
-    }
+    } 
   };
 
  const handleRunCronNow = async () => {
   setIsRunningCron(true);
   try {
-    const res = await fetch("/api/admin/run-promotion-processing", { method: "POST" });
+    const token = await auth.currentUser?.getIdToken();
+    const res = await fetch("/api/admin/run-promotion-processing", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    });
     const data = await res.json();
     if (res.ok) {
       toast.success(`Processed: ${data.activatedCount} activated, ${data.expiredCount} expired`);
